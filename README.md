@@ -45,7 +45,11 @@ A modern web application for book clubs to create polls, vote on books, and mana
    - Create a Firebase project at [https://console.firebase.google.com/](https://console.firebase.google.com/)
    - Enable Authentication with Email/Password
    - Create a Firestore database
-   - Update the Firebase configuration in `src/services/firebase.ts` with your project details
+   - Copy the `.env.example` file to `.env` and update with your Firebase configuration:
+     ```
+     cp .env.example .env
+     ```
+   - Edit the `.env` file with your Firebase project details
 
 4. Start the development server:
    ```
@@ -59,7 +63,17 @@ A modern web application for book clubs to create polls, vote on books, and mana
 To deploy to GitHub Pages:
 
 1. Update the `homepage` field in `package.json` with your GitHub Pages URL
-2. Run:
+2. Set up GitHub repository secrets for Firebase configuration:
+   - Go to your GitHub repository > Settings > Secrets and variables > Actions
+   - Add the following secrets with your Firebase configuration values:
+     - `REACT_APP_FIREBASE_API_KEY`
+     - `REACT_APP_FIREBASE_AUTH_DOMAIN`
+     - `REACT_APP_FIREBASE_DATABASE_URL`
+     - `REACT_APP_FIREBASE_PROJECT_ID`
+     - `REACT_APP_FIREBASE_STORAGE_BUCKET`
+     - `REACT_APP_FIREBASE_MESSAGING_SENDER_ID`
+     - `REACT_APP_FIREBASE_APP_ID`
+3. Run:
    ```
    npm run deploy
    ```
