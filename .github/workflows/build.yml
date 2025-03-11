@@ -29,12 +29,6 @@ jobs:
         env:
           CI: false
 
-      - name: Copy index.html to build
-        run: cp index.html build/
-
-      - name: Copy test.html to build
-        run: cp public/test.html build/
-
       - name: Create .nojekyll file
         run: touch build/.nojekyll
 
