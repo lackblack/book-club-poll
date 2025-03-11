@@ -1,0 +1,20 @@
+// Copy these rules to your Firebase Firestore Rules section in the Firebase Console
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /polls/{pollId} {
+      // Allow anyone to read polls
+      allow read: if true;
+      
+      // Allow anyone to create polls
+      allow create: if true;
+      
+      // Allow updates to polls for voting
+      allow update: if true;
+      
+      // Only allow deletion if the poll has no votes
+      allow delete: if resource.data.voters.size() == 0;
+    }
+  }
+} 

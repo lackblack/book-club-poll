@@ -5,11 +5,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import CreatePoll from './pages/CreatePoll';
 import PollDetails from './pages/PollDetails';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
-import ProtectedRoute from './components/ProtectedRoute';
 import { useAuth } from './hooks/useAuth';
 
 const App: React.FC = () => {
@@ -30,19 +26,8 @@ const App: React.FC = () => {
         <div className="container">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
             <Route path="/poll/:id" element={<PollDetails />} />
-            <Route path="/create-poll" element={
-              <ProtectedRoute>
-                <CreatePoll />
-              </ProtectedRoute>
-            } />
-            <Route path="/profile" element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            } />
+            <Route path="/create-poll" element={<CreatePoll />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

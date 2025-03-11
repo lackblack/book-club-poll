@@ -34,6 +34,11 @@ export interface Poll {
   voters: string[];
 }
 
+// Generate a random ID for anonymous users
+const generateAnonymousId = () => {
+  return 'anon_' + Math.random().toString(36).substring(2, 15);
+};
+
 export const createPoll = async (pollData: Omit<Poll, 'id' | 'createdAt' | 'voters'>): Promise<string> => {
   try {
     const pollRef = await addDoc(collection(db, 'polls'), {
@@ -132,8 +137,11 @@ export const deletePoll = async (pollId: string): Promise<void> => {
   }
 };
 
-export const voteForBook = async (pollId: string, bookKey: string, userId: string): Promise<void> => {
+export const voteForBook = async (pollId: string, bookKey: string): Promise<void> => {
   try {
+    // Generate a random anonymous ID for the voter
+    const anonymousId = generateAnonymousId();
+    
     const pollRef = doc(db, 'polls', pollId);
     const pollSnap = await getDoc(pollRef);
     
@@ -143,10 +151,6 @@ export const voteForBook = async (pollId: string, bookKey: string, userId: strin
     
     const pollData = pollSnap.data() as Poll;
     
-    if (pollData.voters.includes(userId)) {
-      throw new Error('User has already voted in this poll');
-    }
-    
     // Find the book index
     const bookIndex = pollData.books.findIndex(book => book.key === bookKey);
     
@@ -154,10 +158,10 @@ export const voteForBook = async (pollId: string, bookKey: string, userId: strin
       throw new Error('Book not found in poll');
     }
     
-    // Update the book votes and add user to voters
+    // Update the book votes and add anonymous user to voters
     await updateDoc(pollRef, {
       [`books.${bookIndex}.votes`]: increment(1),
-      voters: [...pollData.voters, userId]
+      voters: [...pollData.voters, anonymousId]
     });
   } catch (error) {
     console.error('Error voting for book:', error);
