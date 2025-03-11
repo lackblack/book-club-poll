@@ -3,14 +3,14 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 // Your web app's Firebase configuration
-// Replace with your own Firebase config
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyDcei3x4cgm5d3Jz82EMfwrGi4BCH8MfA4",
+  authDomain: "book-club-poll.firebaseapp.com",
+  databaseURL: "https://book-club-poll-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "book-club-poll",
+  storageBucket: "book-club-poll.firebasestorage.app",
+  messagingSenderId: "635539352323",
+  appId: "1:635539352323:web:a0ba9d26b229d884a71736"
 };
 
 // Initialize Firebase
